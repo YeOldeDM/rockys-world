@@ -1,0 +1,71 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://LaserPew.gd" type="Script" id=1]
+[ext_resource path="res://graphics/laserpew.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 2, 8 )
+
+[sub_resource type="ColorRamp" id=2]
+
+offsets = FloatArray( 0, 0.552083, 1 )
+colors = ColorArray( 0.136719, 0.716736, 1, 1, 0.178489, 0.716853, 1, 0.941667, 0.852783, 0.71875, 1, 0 )
+
+[node name="LaserPew" type="Area2D"]
+
+transform/pos = Vector2( 462, 543 )
+input/pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/scale = Vector2( 2, 3 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite"]
+
+transform/scale = Vector2( 0.5, 0.333333 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+rect = Rect2( -10, -10, 20, 20 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+
+visibility/blend_mode = 1
+config/amount = 128
+config/lifetime = 0.25
+config/local_space = false
+config/texture = ExtResource( 2 )
+params/direction = 0.0
+params/spread = 0.0
+params/linear_velocity = 0.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 0.0
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 2.0
+params/final_size = 1.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+color/color_ramp = SubResource( 2 )
+
+[connection signal="body_enter" from="." to="." method="_on_LaserPew_body_enter"]
+
+[connection signal="exit_screen" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_exit_screen"]
+
+
