@@ -44,6 +44,7 @@ func _on_TreatTime_timeout():
 	if R <= 0.1:
 		spawn_treat(true)
 	else:	spawn_treat(false)
+	# Uncomment this line to get craaazzzy treats ^^
 	#get_node('TreatTime').set_wait_time(get_node('TreatTime').get_wait_time()*0.9)
 
 
